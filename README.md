@@ -5,18 +5,18 @@
 
   <!-- Badges -->
   <p>
-    <a href="#"><img src="https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python" alt="Python 3.10+"></a>
-    <a href="#"><img src="https://img.shields.io/badge/PyTorch-2.4.1-ee4c2c?style=flat-square&logo=pytorch" alt="PyTorch 2.4.1"></a>
-    <a href="#"><img src="https://img.shields.io/badge/Triton-3.0.0-00B4AB?style=flat-square" alt="Triton 3.0.0"></a>
-    <a href="#"><img src="https://img.shields.io/badge/Architecture-MLA%20%2B%20MoE-blueviolet?style=flat-square" alt="MLA+MoE"></a>
-    <a href="#"><img src="https://img.shields.io/badge/Quantization-FP8-orange?style=flat-square" alt="FP8"></a>
-    <a href="#"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License"></a>
+    <img src="https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python" alt="Python 3.10+">
+    <img src="https://img.shields.io/badge/PyTorch-2.4.1-ee4c2c?style=flat-square&logo=pytorch" alt="PyTorch 2.4.1">
+    <img src="https://img.shields.io/badge/Triton-3.0.0-00B4AB?style=flat-square" alt="Triton 3.0.0">
+    <img src="https://img.shields.io/badge/Architecture-MLA%20%2B%20MoE-blueviolet?style=flat-square" alt="MLA+MoE">
+    <img src="https://img.shields.io/badge/Quantization-FP8-orange?style=flat-square" alt="FP8">
+    <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License">
     <br>
-    <a href="#"><img src="https://img.shields.io/github/stars/devtantai-coder/nexus?style=social" alt="GitHub Stars"></a>
-    <a href="#"><img src="https://img.shields.io/github/forks/devtantai-coder/nexus?style=social" alt="GitHub Forks"></a>
-    <a href="#"><img src="https://img.shields.io/github/issues/devtantai-coder/nexus?style=social" alt="GitHub Issues"></a>
-    <a href="#"><img src="https://img.shields.io/github/last-commit/devtantai-coder/nexus?style=flat-square" alt="Last Commit"></a>
-    <a href="#"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT"></a>
+    <a href="https://github.com/devtantai-coder/nexus/stargazers"><img src="https://img.shields.io/github/stars/devtantai-coder/nexus?style=social" alt="GitHub Stars"></a>
+    <a href="https://github.com/devtantai-coder/nexus/forks"><img src="https://img.shields.io/github/forks/devtantai-coder/nexus?style=social" alt="GitHub Forks"></a>
+    <a href="https://github.com/devtantai-coder/nexus/issues"><img src="https://img.shields.io/github/issues/devtantai-coder/nexus?style=social" alt="GitHub Issues"></a>
+    <img src="https://img.shields.io/github/last-commit/devtantai-coder/nexus?style=flat-square" alt="Last Commit">
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT"></a>
   </p>
 </div>
 
