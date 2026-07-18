@@ -19,7 +19,6 @@ gemm_impl: Literal["bf16", "fp8"] = "bf16"
 attn_impl: Literal["naive", "absorb"] = "absorb"
 
 # === Biến toàn cục dùng chung cho các module ===
-_WKV_B_CACHE: Optional[Tuple] = None  # (weight, view) cache cho MLA absorb mode
 
 @dataclass
 class ModelArgs:
@@ -89,6 +88,7 @@ class ModelArgs:
     beta_fast: int = 32
     beta_slow: int = 1
     mscale: float = 1.
+    use_gate_bias: bool = False
 
     def __hash__(self):
         return hash((self.dim, self.n_layers, self.n_heads, self.kv_lora_rank, self.max_seq_len))
@@ -454,6 +454,9 @@ class MLA(nn.Module):
             mscale = 0.1 * args.mscale * math.log(args.rope_factor) + 1.0
             self.softmax_scale = self.softmax_scale * mscale * mscale
 
+        # Cache cho wkv_b view (absorb mode) — instance-level, không dùng global
+        self._wkv_b_cache: Optional[Tuple] = None
+
         if attn_impl == "naive":
             self.register_buffer("k_cache", torch.zeros(args.max_batch_size, args.max_seq_len, self.n_local_heads, self.qk_head_dim), persistent=False)
             self.register_buffer("v_cache", torch.zeros(args.max_batch_size, args.max_seq_len, self.n_local_heads, self.v_head_dim), persistent=False)
@@ -474,7 +477,32 @@ class MLA(nn.Module):
         Returns:
             torch.Tensor: Tensor đầu ra có cùng kích thước với đầu vào.
         """
-        global _WKV_B_CACHE
+        bsz, seqlen, _ = x.size()
+        end_pos = start_pos + seqlen
+        if self.q_lora_rank == 0:
+            q = self.wq(x)
+        else:
+            q = self.wq_b(self.q_norm(self.wq_a(x)))
+        q = q.view(bsz, seqlen, self.n_local_heads, self.qk_head_dim)
+        q_nope, q_pe = torch.split(q, [self.qk_nope_head_dim, self.qk_rope_head_dim], dim=-1)
+        q_pe = apply_rotary_emb(q_pe, freqs_cis)
+        kv = self.wkv_a(x)
+        kv, k_pe = torch.split(kv, [self.kv_lora_rank, self.qk_rope_head_dim], dim=-1)
+        k_pe = apply_rotary_emb(k_pe.unsqueeze(2), freqs_cis)
+
+    def forward(self, x: torch.Tensor, start_pos: int, freqs_cis: torch.Tensor, mask: Optional[torch.Tensor]):
+        """
+        Lan truyền tiến cho Multi-Head Latent Attention (MLA) Layer.
+
+        Args:
+            x (torch.Tensor): Tensor đầu vào có kích thước (batch_size, seq_len, dim).
+            start_pos (int): Vị trí bắt đầu trong chuỗi cho caching.
+            freqs_cis (torch.Tensor): Giá trị số phức mũ đã tính toán trước cho rotary embeddings.
+            mask (Optional[torch.Tensor]): Tensor mặt nạ để loại trừ các vị trí khỏi attention.
+
+        Returns:
+            torch.Tensor: Tensor đầu ra có cùng kích thước với đầu vào.
+        """
         bsz, seqlen, _ = x.size()
         end_pos = start_pos + seqlen
         if self.q_lora_rank == 0:
@@ -502,12 +530,13 @@ class MLA(nn.Module):
                 scores = scores.softmax(dim=-1, dtype=torch.float32).type_as(x)
                 x = torch.einsum("bsht,bthd->bshd", scores, v_full)
             else:
-                if _WKV_B_CACHE is not None and _WKV_B_CACHE[0] is self.wkv_b.weight:
-                    wkv_b = _WKV_B_CACHE[1]
+                # === Absorb mode: không materialize K/V đầy đủ ===
+                if self._wkv_b_cache is not None and self._wkv_b_cache[0] is self.wkv_b.weight:
+                    wkv_b = self._wkv_b_cache[1]
                 else:
                     wkv_b = self.wkv_b.weight if self.wkv_b.scale is None else weight_dequant(self.wkv_b.weight, self.wkv_b.scale, block_size)
                     wkv_b = wkv_b.view(self.n_local_heads, -1, self.kv_lora_rank)
-                    _WKV_B_CACHE = (self.wkv_b.weight, wkv_b)
+                    self._wkv_b_cache = (self.wkv_b.weight, wkv_b)
                 q_nope_proj = torch.einsum("bshd,hdc->bshc", q_nope, wkv_b[:, :self.qk_nope_head_dim])
                 kv_norm = self.kv_norm(kv)
                 scores = (torch.einsum("bshc,btc->bsht", q_nope_proj, kv_norm) +
@@ -529,12 +558,12 @@ class MLA(nn.Module):
                 self.v_cache[:bsz, start_pos:end_pos] = v_full
                 scores = torch.einsum("bshd,bthd->bsht", q_full, self.k_cache[:bsz, :end_pos]) * self.softmax_scale
             else:
-                if _WKV_B_CACHE is not None and _WKV_B_CACHE[0] is self.wkv_b.weight:
-                    wkv_b = _WKV_B_CACHE[1]
+                if self._wkv_b_cache is not None and self._wkv_b_cache[0] is self.wkv_b.weight:
+                    wkv_b = self._wkv_b_cache[1]
                 else:
                     wkv_b = self.wkv_b.weight if self.wkv_b.scale is None else weight_dequant(self.wkv_b.weight, self.wkv_b.scale, block_size)
                     wkv_b = wkv_b.view(self.n_local_heads, -1, self.kv_lora_rank)
-                    _WKV_B_CACHE = (self.wkv_b.weight, wkv_b)
+                    self._wkv_b_cache = (self.wkv_b.weight, wkv_b)
                 q_nope_proj = torch.einsum("bshd,hdc->bshc", q_nope, wkv_b[:, :self.qk_nope_head_dim])
                 kv_norm = self.kv_norm(kv)
                 self.kv_cache[:bsz, start_pos:end_pos] = kv_norm
@@ -617,7 +646,7 @@ class Gate(nn.Module):
         self.score_func = args.score_func
         self.route_scale = args.route_scale
         self.weight = nn.Parameter(torch.empty(args.n_routed_experts, args.dim))
-        self.bias = nn.Parameter(torch.empty(args.n_routed_experts, dtype=torch.float32)) if self.dim == 7168 else None
+        self.bias = nn.Parameter(torch.empty(args.n_routed_experts, dtype=torch.float32)) if args.use_gate_bias else None
 
     def forward(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         """
@@ -721,8 +750,6 @@ class MoE(nn.Module):
         self.experts = nn.ModuleList([Expert(args.dim, args.moe_inter_dim) if self.experts_start_idx <= i < self.experts_end_idx else None
                                       for i in range(self.n_routed_experts)])
         self.shared_experts = MLP(args.dim, args.n_shared_experts * args.moe_inter_dim)
-        # Pre-allocate buffer cho expert indices để giảm fragmentation
-        self.register_buffer("_expert_buf", torch.empty(0), persistent=False)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -739,28 +766,34 @@ class MoE(nn.Module):
         weights, indices = self.gate(x_flat)
         y = torch.zeros_like(x_flat)
 
-        # Sort-based expert grouping: giữ mọi thứ trên GPU, tránh bincount + tolist()
-        # Sắp xếp indices để group tokens theo expert, xử lý bằng unique_consecutive
-        flat_indices = indices.flatten()  # (n_tokens * topk,)
+        # Sort-based expert grouping: giữ mọi thứ trên GPU
+        flat_indices = indices.flatten()
         sorted_indices, perm = flat_indices.sort(stable=True)
-        # Tìm boundary giữa các expert groups
         unique_experts, counts = torch.unique_consecutive(sorted_indices, return_counts=True)
-        expert_offsets = torch.cat([torch.zeros(1, dtype=torch.long, device=x.device), counts.cumsum(0)[:-1]])
 
-        topk = self.n_activated_experts
-        for i in range(len(unique_experts)):
-            expert_idx = unique_experts[i].item()
-            if expert_idx < self.experts_start_idx or expert_idx >= self.experts_end_idx:
-                continue
-            expert = self.experts[expert_idx]
-            if expert is None:
-                continue
-            start = expert_offsets[i].item()
-            end = start + counts[i].item()
-            token_perm = perm[start:end]  # positions in flattened (n_tokens * topk,)
-            rows = token_perm // topk  # token index
-            w = weights.view(-1)[token_perm, None]
-            y.index_add_(0, rows, expert(x_flat[rows]) * w)
+        # Pre-filter local experts trên GPU — giảm .item() calls
+        local_mask = (unique_experts >= self.experts_start_idx) & (unique_experts < self.experts_end_idx)
+        local_expert_ids = unique_experts[local_mask]
+        local_counts = counts[local_mask]
+
+        if local_counts.numel() > 0:
+            all_offsets = torch.zeros_like(counts)
+            if counts.numel() > 1:
+                all_offsets[1:] = counts.cumsum(0)[:-1]
+            local_offsets = all_offsets[local_mask]
+
+            topk = self.n_activated_experts
+            for i in range(len(local_expert_ids)):
+                expert_idx = local_expert_ids[i].item()
+                expert = self.experts[expert_idx]
+                if expert is None:
+                    continue
+                start = local_offsets[i].item()
+                end = start + local_counts[i].item()
+                token_perm = perm[start:end]
+                rows = token_perm // topk
+                w = weights.view(-1)[token_perm, None]
+                y.index_add_(0, rows, expert(x_flat[rows]) * w)
         z = self.shared_experts(x_flat)
         if world_size > 1:
             dist.all_reduce(y)
@@ -821,6 +854,15 @@ class Transformer(nn.Module):
         head (nn.Module): Tầng chiếu đầu ra ánh xạ tới kích thước từ vựng.
         freqs_cis (torch.Tensor): Giá trị số phức mũ đã tính toán trước cho rotary embeddings.
     """
+    @staticmethod
+    def setup_global_flags():
+        """Bật TF32 và cudnn benchmark — gọi 1 lần khi khởi tạo model."""
+        torch.set_float32_matmul_precision('high')
+        if torch.cuda.is_available():
+            torch.backends.cudnn.benchmark = True
+            torch.backends.cuda.matmul.allow_tf32 = True
+            torch.backends.cudnn.allow_tf32 = True
+
     def __init__(self, args: ModelArgs):
         """
         Khởi tạo mô hình Transformer.
@@ -833,12 +875,7 @@ class Transformer(nn.Module):
         rank = dist.get_rank() if dist.is_initialized() else 0
         Linear.dtype = torch.float8_e4m3fn if args.dtype == "fp8" else (torch.bfloat16 if args.dtype == "bf16" else torch.float32)
         Linear.scale_fmt = args.scale_fmt
-        # Bật TF32 trên ma trận nhân để tăng throughput (~1.5-2x trên Ampere+)
-        torch.set_float32_matmul_precision('high')
-        if torch.cuda.is_available():
-            torch.backends.cudnn.benchmark = True
-            torch.backends.cuda.matmul.allow_tf32 = True
-            torch.backends.cudnn.allow_tf32 = True
+        Transformer.setup_global_flags()
         super().__init__()
         self.max_seq_len = args.max_seq_len
         self.embed = ParallelEmbedding(args.vocab_size, args.dim)
@@ -846,7 +883,7 @@ class Transformer(nn.Module):
         for layer_id in range(args.n_layers):
             self.layers.append(Block(layer_id, args))
         self.norm = RMSNorm(args.dim)
-        self.head = ColumnParallelLinear(args.dim, args.vocab_size, dtype=torch.get_default_dtype())
+        self.head = ColumnParallelLinear(args.dim, args.vocab_size, dtype=Linear.dtype)
         self.register_buffer("freqs_cis", precompute_freqs_cis(args), persistent=False)
         # Flag cho phép torch.compile — chỉ bật nếu môi trường hỗ trợ
         self._compiled = False

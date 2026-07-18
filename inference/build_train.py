@@ -3,7 +3,7 @@ Build dataset và train model tiếng Việt hoàn chỉnh.
 Model ~50M params, vocab ~200 từ, dataset ~2000+ samples.
 """
 import json, random, torch, sys, os, math
-sys.path.insert(0, '/home/thinkpad/Downloads/nexus/inference')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from model import Transformer, ModelArgs
 import torch.nn.init as _init
 
@@ -382,7 +382,7 @@ torch.save({
     'model_args': model_args,
     'vocab': vocab,
     'vocab_size': vocab_size,
-}, '/home/thinkpad/Downloads/nexus/inference/chat_model.pt')
+}, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'chat_model.pt'))
 print(f'\n✅ Saved chat_model.pt')
 print(f'   {n_params:,} params, {vocab_size} vocab, {len(samples)} samples')
 sys.stdout.flush()
