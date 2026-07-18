@@ -32,7 +32,7 @@ mô hình ngôn ngữ Transformer mã nguồn mở với những công nghệ ti
 
 📦 Tech Stack: Python 3.10+ | PyTorch 2.4.1 | Triton 3.0.0
 
-🔗 GitHub: https://github.com/nexus-ai/nexus
+🔗 GitHub: https://github.com/devtantai-coder/nexus
 
 #AI #MachineLearning #DeepLearning #LLM #VietnameseAI #OpenSource #Nexus
 ```
@@ -49,7 +49,7 @@ mô hình ngôn ngữ Transformer mã nguồn mở với những công nghệ ti
 ✨ Model Parallelism
 ✨ Tiếng Việt first 🇻🇳
 
-🔗 https://github.com/nexus-ai/nexus
+🔗 https://github.com/devtantai-coder/nexus
 ⭐ Star để ủng hộ nhé!
 
 #AI #LLM #OpenSource #VietnameseAI #DeepLearning
@@ -73,7 +73,7 @@ I built Nexus, an open-source Transformer language model featuring:
 
 Tech stack: Python 3.10+, PyTorch 2.4.1, Triton 3.0.0
 
-GitHub: https://github.com/nexus-ai/nexus
+GitHub: https://github.com/devtantai-coder/nexus
 
 Would love to hear your feedback!
 ```
@@ -90,7 +90,7 @@ Would love to hear your feedback!
 ✨ Model Parallelism
 ✨ Tiếng Việt first 🇻🇳
 
-🔗 https://github.com/nexus-ai/nexus
+🔗 https://github.com/devtantai-coder/nexus
 ⭐ Star để ủng hộ nhé!
 
 #AI #LLM #OpenSource #VietnameseAI #DeepLearning
@@ -115,7 +115,7 @@ Key features:
 
 The MLA "absorb" mechanism is particularly interesting — it fuses the KV projection into the attention computation, avoiding materializing full K/V tensors.
 
-GitHub: https://github.com/nexus-ai/nexus
+GitHub: https://github.com/devtantai-coder/nexus
 ```
 
 ### 4. Hacker News
@@ -135,7 +135,7 @@ I built Nexus, an open-source Transformer LLM featuring:
 
 The MLA "absorb" mechanism is the key innovation — it fuses the KV projection into attention computation, avoiding materializing full K/V tensors.
 
-GitHub: https://github.com/nexus-ai/nexus
+GitHub: https://github.com/devtantai-coder/nexus
 ```
 
 ### 4. Telegram / Discord
@@ -150,7 +150,7 @@ GitHub: https://github.com/nexus-ai/nexus
 ✨ Model Parallelism
 ✨ Tiếng Việt first 🇻🇳
 
-🔗 GitHub: https://github.com/nexus-ai/nexus
+🔗 GitHub: https://github.com/devtantai-coder/nexus
 ⭐ Star để ủng hộ nhé!
 ```
 
@@ -171,7 +171,7 @@ I built Nexus, an open-source Transformer LLM featuring:
 
 The MLA "absorb" mechanism is the key innovation — it fuses the KV projection into attention computation, avoiding materializing full K/V tensors. This is similar to what DeepSeek-V2 uses.
 
-GitHub: https://github.com/nexus-ai/nexus
+GitHub: https://github.com/devtantai-coder/nexus
 ```
 
 ### 4. Telegram / Discord
@@ -186,7 +186,7 @@ GitHub: https://github.com/nexus-ai/nexus
 ✨ Model Parallelism
 ✨ Tiếng Việt first 🇻🇳
 
-🔗 GitHub: https://github.com/nexus-ai/nexus
+🔗 GitHub: https://github.com/devtantai-coder/nexus
 ⭐ Star để ủng hộ nhé!
 ```
 
@@ -207,7 +207,7 @@ I built Nexus, an open-source Transformer LLM featuring:
 
 The MLA "absorb" mechanism is the key innovation — it fuses the KV projection into attention computation, avoiding materializing full K/V tensors. This is similar to what DeepSeek-V2 uses.
 
-GitHub: https://github.com/nexus-ai/nexus
+GitHub: https://github.com/devtantai-coder/nexus
 ```
 
 ### 6. Telegram Groups (AI/ML Việt Nam)
@@ -225,7 +225,7 @@ GitHub: https://github.com/nexus-ai/nexus
 
 📦 Python | PyTorch | Triton
 
-🔗 GitHub: https://github.com/nexus-ai/nexus
+🔗 GitHub: https://github.com/devtantai-coder/nexus
 ⭐ Star để ủng hộ nhé!
 ```
 

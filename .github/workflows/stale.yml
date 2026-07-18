@@ -6,7 +6,7 @@ on:
 
 jobs:
   stale:
-    if: ${{ github.repository == 'nexus-ai/nexus' }}
+    if: ${{ github.repository == 'devtantai-coder/nexus' }}
     runs-on: ubuntu-latest
     steps:
       - name: "Mark and close stale issues"

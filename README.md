@@ -12,10 +12,10 @@
     <a href="#"><img src="https://img.shields.io/badge/Quantization-FP8-orange?style=flat-square" alt="FP8"></a>
     <a href="#"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License"></a>
     <br>
-    <a href="#"><img src="https://img.shields.io/github/stars/nexus-ai/nexus?style=social" alt="GitHub Stars"></a>
-    <a href="#"><img src="https://img.shields.io/github/forks/nexus-ai/nexus?style=social" alt="GitHub Forks"></a>
-    <a href="#"><img src="https://img.shields.io/github/issues/nexus-ai/nexus?style=social" alt="GitHub Issues"></a>
-    <a href="#"><img src="https://img.shields.io/github/last-commit/nexus-ai/nexus?style=flat-square" alt="Last Commit"></a>
+    <a href="#"><img src="https://img.shields.io/github/stars/devtantai-coder/nexus?style=social" alt="GitHub Stars"></a>
+    <a href="#"><img src="https://img.shields.io/github/forks/devtantai-coder/nexus?style=social" alt="GitHub Forks"></a>
+    <a href="#"><img src="https://img.shields.io/github/issues/devtantai-coder/nexus?style=social" alt="GitHub Issues"></a>
+    <a href="#"><img src="https://img.shields.io/github/last-commit/devtantai-coder/nexus?style=flat-square" alt="Last Commit"></a>
     <a href="#"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT"></a>
   </p>
 </div>
@@ -633,25 +633,25 @@ Nexus được lấy cảm hứng từ các kiến trúc tiên tiến như:
 **Nexus là dự án mã nguồn mở Việt Nam — hãy giúp chúng tôi lan tỏa!**
 
 <p align="center">
-  <a href="https://twitter.com/intent/tweet?text=Nexus%20-%20M%C3%B4%20h%C3%ACnh%20ng%C3%B4n%20ng%E1%BB%AF%20Transformer%20th%E1%BA%BF%20h%E1%BB%87%20m%E1%BB%9Bi%20v%E1%BB%9Bi%20MLA%20%2B%20MoE%20%2B%20FP8%20Quantization&url=https://github.com/nexus-ai/nexus" target="_blank">
+  <a href="https://twitter.com/intent/tweet?text=Nexus%20-%20M%C3%B4%20h%C3%ACnh%20ng%C3%B4n%20ng%E1%BB%AF%20Transformer%20th%E1%BA%BF%20h%E1%BB%87%20m%E1%BB%9Bi%20v%E1%BB%9Bi%20MLA%20%2B%20MoE%20%2B%20FP8%20Quantization&url=https://github.com/devtantai-coder/nexus" target="_blank">
     <img src="https://img.shields.io/badge/Chia sẻ trên-X (Twitter)-1DA1F2?style=for-the-badge&logo=x" alt="Share on X">
   </a>
-  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://github.com/nexus-ai/nexus" target="_blank">
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://github.com/devtantai-coder/nexus" target="_blank">
     <img src="https://img.shields.io/badge/Chia sẻ trên-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin" alt="Share on LinkedIn">
   </a>
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/nexus-ai/nexus" target="_blank">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/devtantai-coder/nexus" target="_blank">
     <img src="https://img.shields.io/badge/Chia sẻ trên-Facebook-1877F2?style=for-the-badge&logo=facebook" alt="Share on Facebook">
   </a>
-  <a href="https://www.reddit.com/submit?url=https://github.com/nexus-ai/nexus&title=Nexus%20-%20M%C3%B4%20h%C3%ACnh%20ng%C3%B4n%20ng%E1%BB%AF%20Transformer%20v%E1%BB%9Bi%20MLA%20%2B%20MoE%20%2B%20FP8" target="_blank">
+  <a href="https://www.reddit.com/submit?url=https://github.com/devtantai-coder/nexus&title=Nexus%20-%20M%C3%B4%20h%C3%ACnh%20ng%C3%B4n%20ng%E1%BB%AF%20Transformer%20v%E1%BB%9Bi%20MLA%20%2B%20MoE%20%2B%20FP8" target="_blank">
     <img src="https://img.shields.io/badge/Chia sẻ trên-Reddit-FF4500?style=for-the-badge&logo=reddit" alt="Share on Reddit">
   </a>
-  <a href="https://news.ycombinator.com/submitlink?u=https://github.com/nexus-ai/nexus&t=Nexus%20-%20M%C3%B4%20h%C3%ACnh%20ng%C3%B4n%20ng%E1%BB%AF%20Transformer%20v%E1%BB%9Bi%20MLA%20%2B%20MoE%20%2B%20FP8" target="_blank">
+  <a href="https://news.ycombinator.com/submitlink?u=https://github.com/devtantai-coder/nexus&t=Nexus%20-%20M%C3%B4%20h%C3%ACnh%20ng%C3%B4n%20ng%E1%BB%AF%20Transformer%20v%E1%BB%9Bi%20MLA%20%2B%20MoE%20%2B%20FP8" target="_blank">
     <img src="https://img.shields.io/badge/Chia sẻ trên-Hacker%20News-FF6600?style=for-the-badge&logo=ycombinator" alt="Share on HN">
   </a>
-  <a href="https://t.me/share/url?url=https://github.com/nexus-ai/nexus&text=Nexus%20-%20M%C3%B4%20h%C3%ACnh%20ng%C3%B4n%20ng%E1%BB%AF%20Transformer%20v%E1%BB%9Bi%20MLA%20%2B%20MoE%20%2B%20FP8" target="_blank">
+  <a href="https://t.me/share/url?url=https://github.com/devtantai-coder/nexus&text=Nexus%20-%20M%C3%B4%20h%C3%ACnh%20ng%C3%B4n%20ng%E1%BB%AF%20Transformer%20v%E1%BB%9Bi%20MLA%20%2B%20MoE%20%2B%20FP8" target="_blank">
     <img src="https://img.shields.io/badge/Chia sẻ trên-Telegram-26A5E4?style=for-the-badge&logo=telegram" alt="Share on Telegram">
   </a>
-  <a href="https://discord.com/share?url=https://github.com/nexus-ai/nexus" target="_blank">
+  <a href="https://discord.com/share?url=https://github.com/devtantai-coder/nexus" target="_blank">
     <img src="https://img.shields.io/badge/Chia sẻ trên-Discord-5865F2?style=for-the-badge&logo=discord" alt="Share on Discord">
   </a>
 </p>
@@ -660,7 +660,7 @@ Nexus được lấy cảm hứng từ các kiến trúc tiên tiến như:
 
 ## 📊 Star History & Phát Triển
 
-[![Star History Chart](https://api.star-history.com/svg?repos=nexus-ai/nexus&type=Date)](https://star-history.com/#nexus-ai/nexus&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=devtantai-coder/nexus&type=Date)](https://star-history.com/#devtantai-coder/nexus&Date)
 
 ---
 
@@ -697,8 +697,8 @@ Nexus được lấy cảm hứng từ các kiến trúc tiên tiến như:
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/nexus-ai">
-        <img src="https://github.com/nexus-ai.png" width="80" alt="Nexus AI"/>
+      <a href="https://github.com/devtantai-coder">
+        <img src="https://github.com/devtantai-coder.png" width="80" alt="Nexus AI"/>
         <br /><b>Nexus AI Team</b>
       </a>
       <br />
@@ -723,11 +723,11 @@ Nếu bạn thấy Nexus hữu ích, hãy:
 <div align="center">
   <h3>🌟 Được xây dựng với ❤️ cho cộng đồng AI Việt Nam 🌟</h3>
   <p>
-    <a href="https://github.com/nexus-ai/nexus">
-      <img src="https://img.shields.io/github/stars/nexus-ai/nexus?style=social" alt="Stars">
+    <a href="https://github.com/devtantai-coder/nexus">
+      <img src="https://img.shields.io/github/stars/devtantai-coder/nexus?style=social" alt="Stars">
     </a>
-    <a href="https://github.com/nexus-ai/nexus/fork">
-      <img src="https://img.shields.io/github/forks/nexus-ai/nexus?style=social" alt="Forks">
+    <a href="https://github.com/devtantai-coder/nexus/fork">
+      <img src="https://img.shields.io/github/forks/devtantai-coder/nexus?style=social" alt="Forks">
     </a>
   </p>
   <p>
