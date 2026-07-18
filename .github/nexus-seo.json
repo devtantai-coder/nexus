@@ -1,0 +1,17 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Nexus AI",
+  "description": "M\u00f4 h\u00ecnh ng\u00f4n ng\u1eef Transformer m\u00e3 ngu\u1ed3n m\u1edf Vi\u1ec7t Nam v\u1edbi Multi-Head Latent Attention, Mixture-of-Experts v\u00e0 FP8 Quantization",
+  "url": "https://github.com/devtantai-coder/nexus",
+  "codeRepository": "https://github.com/devtantai-coder/nexus",
+  "programmingLanguage": [
+    "Python",
+    "CUDA",
+    "Triton"
+  ],
+  "operatingSystem": "Linux",
+  "applicationCategory": "Artificial Intelligence",
+  "license": "MIT",
+  "keywords": "nexus ai, llm, transformer, mla, moe, fp8, vietnamese ai"
+}

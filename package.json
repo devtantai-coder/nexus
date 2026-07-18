@@ -1,0 +1,15 @@
+{
+  "name": "nexus",
+  "version": "0.1.0",
+  "description": "🧠 Nexus AI - Mô hình ngôn ngữ Transformer mã nguồn mở Việt Nam. Multi-Head Latent Attention (MLA), Mixture-of-Experts 64 experts, FP8 Quantization bằng Triton, YaRN RoPE 128K+ context.",
+  "keywords": [
+    "nexus", "nexus-ai", "llm", "transformer", "deep-learning",
+    "artificial-intelligence", "machine-learning", "mla",
+    "multi-head-latent-attention", "mixture-of-experts", "moe",
+    "fp8", "fp8-quantization", "triton", "pytorch", "nlp",
+    "large-language-model", "vietnamese-ai", "open-source",
+    "neural-network"
+  ],
+  "author": "Nexus AI Team",
+  "license": "MIT"
+}
