@@ -1,6 +1,0 @@
-# GitHub Pages config
-title: Nexus 🧠
-description: Mô Hình Ngôn Ngữ Transformer Thế Hệ Mới với MLA, MoE, FP8 Quantization
-url: "https://devtantai-coder.github.io"
-baseurl: "/nexus"
-theme: jekyll-theme-cayman
