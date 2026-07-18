@@ -1,0 +1,20 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="50%" style="stop-color:#a855f7"/>
+      <stop offset="100%" style="stop-color:#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="200" text-anchor="middle" font-family="system-ui, sans-serif" font-size="80" font-weight="800" fill="url(#title)">Nexus 🧠</text>
+  <text x="600" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" fill="#a0a0b0" font-style="italic">Neural EXecutive Unified System</text>
+  <text x="600" y="320" text-anchor="middle" font-family="system-ui, sans-serif" font-size="36" fill="#e0e0e0" font-weight="600">Mô Hình Ngôn Ngữ Transformer Thế Hệ Mới</text>
+  <text x="600" y="380" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" fill="#a0a0b0">MLA + MoE + FP8 Quantization</text>
+  <text x="600" y="440" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#6a6a8a">Mã nguồn mở — Được xây dựng bởi cộng đồng AI Việt Nam</text>
+  <rect x="400" y="480" width="400" height="50" rx="25" fill="#6366f1" opacity="0.9"/>
+  <text x="600" y="512" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="white" font-weight="600">⭐ Star on GitHub</text>
