@@ -1,0 +1,6 @@
+# Nexus Robots
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://devtantai-coder.github.io/nexus/sitemap.xml
